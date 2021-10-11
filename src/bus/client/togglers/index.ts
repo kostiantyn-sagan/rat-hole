@@ -9,6 +9,8 @@ const initialState = {
     isOnline:           navigator.onLine,
     isMessagesFetching: false,
     isTodosFetching:    false,
+    isProfileFetching:  false,
+    isLoggedIn:         false,
 };
 
 // Types
