@@ -1,46 +1,47 @@
 // Core
 import { put } from 'redux-saga/effects';
+import localStore from 'store';
 
-// // Actions
-// import { togglerCreatorAction } from '../../../client/togglers';
-// import { profileActions } from '../../slice';
+// Bus
+import { togglerCreatorAction } from '../../../client/togglers';
+import { profileActions } from '../../slice';
 
-// // Tools
-// import { makeRequest } from '../../../../tools/utils';
-// import { API_URL } from '../../../../init';
+// Types
+import { User } from '../../types';
+import { FetchRefreshProfileContract } from '../types';
 
-// // Types
-// import { RefreshRatUserContract } from '../types';
+// Tools
+import { API_URL } from '../../../../init';
+import { makeRequest } from '../../../../tools/utils';
 
-// export function* refreshRatuser({ payload: ratuserId }: ReturnType<RefreshRatUserContract>) {
-//     const fetcher = async () => {
-//         const response = await fetch(`${API_URL}/users/refresh/${ratuserId}`, {
-//             method:  'GET',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//         });
+export function* refreshRatuser({ payload: userId }: ReturnType<FetchRefreshProfileContract>) {
+    const fetcher = async () => {
+        const response = await fetch(`${API_URL}/users/refresh/${userId}`, {
+            method:  'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-//         if (response.status !== 200) {
-//             throw new Error('refresh failed');
-//         }
+        if (response.status !== 200) {
+            throw new Error('refresh failed');
+        }
 
-//         const result = await response.json();
+        const result = await response.json();
 
-//         return result;
-//     };
+        return result;
+    };
 
-//     const result: string | null = yield makeRequest({
-//         fetcher,
-//         togglerType:  'isProfileFetching',
-//         succesAction: profileActions.setUser,
-//         delay:        500,
-//     });
+    const result: User | null = yield makeRequest<User>({
+        fetcher,
+        succesAction:    profileActions.setUser,
+        errorSideEffect: () => {
+            localStore.clearAll();
+        },
+        togglerType: 'isProfileFetching',
+    });
 
-//     if (result !== null) {
-//         yield put(togglerCreatorAction({
-//             type:  'isLoggedIn',
-//             value: true,
-//         }));
-//     }
-// }
+    if (result !== null) {
+        yield put(togglerCreatorAction({ type: 'isLoggedIn', value: true }));
+    }
+}

@@ -1,6 +1,7 @@
 // Core
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import localStorage from 'store';
 
 // Redux
 // import { useTogglersRedux } from '../client/togglers';
@@ -9,7 +10,10 @@ import { useEffect } from 'react';
 import { useSelector } from '../../tools/hooks';
 
 // Saga actions
-import { fetchProfileActionAsync } from './saga/actions';
+import {
+    fetchRefreshProfileActionAsync,
+    fetchRegisterProfileActionAsync,
+} from './saga/actions';
 
 // Actions
 // import { profileActions } from './slice';
@@ -21,10 +25,16 @@ export const useProfile = () => {
     const { profile } = useSelector((state) => state);
 
     useEffect(() => {
-        dispatch(fetchProfileActionAsync());
+        const userId: string | void = localStorage.get('userId');
+
+        if (userId) {
+            dispatch(fetchRefreshProfileActionAsync(userId));
+        }
     }, []);
 
     return {
         profile,
+        // isRefreshing
+        registerUserAsync: (username: string) => void dispatch(fetchRegisterProfileActionAsync(username)),
     };
 };

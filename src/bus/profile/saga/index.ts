@@ -5,17 +5,21 @@ import { takeEvery, all, call } from 'redux-saga/effects';
 // Types
 import * as types from './types';
 
-// // Workers
+//  Workers
 import {
     registerRatuser,
+    refreshRatuser,
 } from './workers';
 
-function* watchFetchUser(): SagaIterator {
-    yield takeEvery(types.FETCH_PROFILE_ASYNC, registerRatuser);
+function* watchRegisterUser(): SagaIterator {
+    yield takeEvery(types.FETCH_REGISTER_PROFILE_ASYNC, registerRatuser);
+}
+function* watchRefreshUser(): SagaIterator {
+    yield takeEvery(types.FETCH_REFRESH_PROFILE_ASYNC, refreshRatuser);
 }
 
 export function* watchProfile(): SagaIterator {
-    yield all([ call(watchFetchUser) ]);
+    yield all([ call(watchRegisterUser), call(watchRefreshUser) ]);
 }
 
 // // Core

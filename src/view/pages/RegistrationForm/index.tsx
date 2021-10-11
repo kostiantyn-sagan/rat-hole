@@ -1,6 +1,7 @@
 // Core
 import React from 'react';
 import { Button } from '@mui/material';
+import { v4 } from 'uuid';
 
 // Redux
 import { useProfile } from '../../../bus/profile';
@@ -12,7 +13,7 @@ import { ErrorBoundary } from '../../components';
 // import { useFilter } from '../../../bus/client/filters';
 
 // Hooks
-// import { useForm } from '../../../tools/hooks';
+import { useForm } from '../../../tools/hooks';
 
 // Styles
 import * as S from './styles';
@@ -24,56 +25,32 @@ import * as S from './styles';
 // type PropTypes = ReturnType<typeof useFilter>
 
 const RegistrationForm = () => {
-    const { profile } = useProfile();
+    const [ form, handleChange ] = useForm({
+        username: `RAT:${v4().slice(0, 5)}`,
+    });
+    const { profile, registerUserAsync } = useProfile();
+    console.log('данные profile внутри RegistrationForm ', profile);
 
-    console.log(profile);
-    // const [ filterForm, filterFormHandleChange, , resetFilterForm ]
-    // = useForm<T.TemperatureInitialState>(T.temperatureInitialState);
-
-    // const [ dayTypeState, setDayTypeState ] = useState<T.DayTypeInitialState>(
-    //     T.dayTypeInitialState,
-    // );
-
-    // const setDayTypeStateHandler = (dayType: DayType) => void setDayTypeState(
-    //     dayType === 'cloudy'
-    //         ? { isCloudy: true, isSunny: null }
-    //         : { isCloudy: null, isSunny: true },
-    // );
-
-    // const isFormfilledHandler = (
-    //     form: T.TemperatureInitialState & T.DayTypeInitialState,
-    // ) => Object.entries(form).some(([ , value ]) => value !== null);
-
-    // const isReduxFormfilled = isFormfilledHandler(filterData);
-
-    // const isComponentFormfilled = isFormfilledHandler({
-    //     ...filterForm,
-    //     ...dayTypeState,
-    // });
-
-    // const filterHandleSubmit = () => {
-    //     if (isReduxFormfilled) {
-    //         resetFilterState();
-    //         resetFilterForm();
-    //         setDayTypeState(T.dayTypeInitialState);
-
-    //         return;
-    //     }
-
-    //     setFilterData({ ...filterForm, ...dayTypeState });
-    // };
+    const registerHandler = () => {
+        if (form.username) {
+            registerUserAsync(form.username);
+        }
+    };
 
     return (
         <S.Form>
             <S.Input
                 autoFocus
                 autoComplete = 'off'
+                name = 'username'
                 placeholder = 'Enter your ratname'
-                type = 'text'
+                value = { form.username }
+                onChange = { handleChange }
             />
             <Button
                 size = 'large'
-                type = 'submit'>Drop into hole
+                onClick = { registerHandler }>
+                Drop into hole
             </Button>
         </S.Form>
     );
