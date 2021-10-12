@@ -1,10 +1,10 @@
 // Core
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import localStorage from 'store';
+import localStore from 'store';
 
 // Redux
-// import { useTogglersRedux } from '../client/togglers';
+import { useTogglersRedux } from '../client/togglers';
 
 // Tools
 import { useSelector } from '../../tools/hooks';
@@ -21,19 +21,30 @@ import {
 // Hooks
 export const useProfile = () => {
     const dispatch = useDispatch();
+    const { setTogglerAction } = useTogglersRedux();
 
     const { profile } = useSelector((state) => state);
 
     useEffect(() => {
-        const userId: string | void = localStorage.get('userId');
+        const userId: string | void = localStore.get('userId');
 
         if (userId) {
             dispatch(fetchRefreshProfileActionAsync(userId));
         }
     }, []);
 
+    const logout = () => {
+        console.log('Нажали на logout');
+        localStore.clearAll();
+        setTogglerAction({
+            type:  'isLoggedIn',
+            value: false,
+        });
+    };
+
     return {
         profile,
+        logout,
         // isRefreshing
         registerUserAsync: (username: string) => void dispatch(fetchRegisterProfileActionAsync(username)),
     };

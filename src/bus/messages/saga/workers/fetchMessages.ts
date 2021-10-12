@@ -21,8 +21,4 @@ export function* fetchMessages() {
     if (combineResult?.name === 'ControlledError') {
         console.log(combineResult.errorId);
     }
-
-    // if (combineResult.length) {
-    //     console.log(combineResult);
-    // }
 }

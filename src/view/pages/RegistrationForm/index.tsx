@@ -28,8 +28,7 @@ const RegistrationForm = () => {
     const [ form, handleChange ] = useForm({
         username: `RAT:${v4().slice(0, 5)}`,
     });
-    const { profile, registerUserAsync } = useProfile();
-    console.log('данные profile внутри RegistrationForm ', profile);
+    const { registerUserAsync } = useProfile();
 
     const registerHandler = () => {
         if (form.username) {
@@ -50,7 +49,7 @@ const RegistrationForm = () => {
             <Button
                 size = 'large'
                 onClick = { registerHandler }>
-                Drop into hole
+                Login
             </Button>
         </S.Form>
     );

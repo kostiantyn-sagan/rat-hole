@@ -1,27 +1,19 @@
 // Core
-import React, { FC, useRef } from 'react';
-
-// Hooks
-import { useOnScreen } from '../../../tools/hooks';
+import React from 'react';
 
 // Components
-import { ErrorBoundary } from '../../components';
+import { ErrorBoundary, CustomMenu, ChatBox, MessageInputField } from '../../components';
 
 // Styles
 import { Container } from './styles';
 
-const Main: FC = () => {
-    const divRef = useRef(null);
-    const visible = useOnScreen(divRef, '0px');
-
-    return (
-        <Container>
-            <div ref = { divRef }>
-                {visible ? 'visible' : 'hide'}
-            </div>
-        </Container>
-    );
-};
+const Main = () => (
+    <Container>
+        <CustomMenu/>
+        <ChatBox/>
+        <MessageInputField/>
+    </Container>
+);
 
 export default () => (
     <ErrorBoundary>
