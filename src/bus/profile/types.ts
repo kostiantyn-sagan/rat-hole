@@ -10,3 +10,4 @@ export type UserState = User
 
 // Contracts
 export type SetUserContract = CaseReducer<UserState, PayloadAction<User>>;
+export type ClearUserContract = CaseReducer<UserState>;

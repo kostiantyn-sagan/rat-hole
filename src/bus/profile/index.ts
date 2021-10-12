@@ -16,7 +16,7 @@ import {
 } from './saga/actions';
 
 // Actions
-// import { profileActions } from './slice';
+import { profileActions } from './slice';
 
 // Hooks
 export const useProfile = () => {
@@ -34,12 +34,14 @@ export const useProfile = () => {
     }, []);
 
     const logout = () => {
-        console.log('Нажали на logout');
         localStore.clearAll();
+
         setTogglerAction({
             type:  'isLoggedIn',
             value: false,
         });
+
+        dispatch(profileActions.clearUser());
     };
 
     return {

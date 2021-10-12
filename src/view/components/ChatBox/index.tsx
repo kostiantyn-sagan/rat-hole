@@ -1,45 +1,52 @@
 // Core
-import React from 'react';
-import { Box, ListItem, ListItemText } from '@mui/material';
-import { FixedSizeList, ListChildComponentProps  } from 'react-window';
+import React, { FC } from 'react';
+import { Box, Card, CardContent, Typography, CardActions, Button } from '@mui/material';
+import moment from 'moment';
 
-// Redux
-import { useMessages } from '../../../bus/messages';
+// Types
+import * as Types from '../../../bus/messages/types';
 
-export const ChatBox = () => {
-    const { messages } = useMessages();
+type PropTypes = {
+    messages: Types.MessagesState
+};
+
+export const ChatBox: FC<PropTypes> = ({ messages }) => {
     console.log('messages внутри ChatBox', messages);
-
-    function renderRow(props: ListChildComponentProps) {
-        const { index, style } = props;
-
-        return (
-            <ListItem
-                divider
-                component = 'div'
-                key = { index }
-                style = { style }>
-                <ListItemText primary = { `Item ${index + 1}` } />
-            </ListItem>
-        );
-    }
+    // const reversedMessages = messages.length !== 0 ? [ ...messages.reverse() ] : [];
+    // console.log('reversedMessages', reversedMessages);
 
     return (
-        <Box
-            sx = {{
-                width:    '100%',
-                height:   400,
-                maxWidth: 360,
-                bgcolor:  'background.paper',
-            }}>
-            <FixedSizeList
-                height = { 400 }
-                itemCount = { 200 }
-                itemSize = { 46 }
-                overscanCount = { 5 }
-                width = { 360 }>
-                {renderRow}
-            </FixedSizeList>
+        <Box sx = {{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper', overflowY: 'scroll' }}>
+            {messages.map(({  _id, username, text, createdAt, updatedAt }) => (
+                <Card
+                    key = { _id }
+                    sx = {{ minWidth: 275 }}>
+                    <CardContent>
+                        <Typography
+                            gutterBottom
+                            color = 'text.secondary'
+                            sx = {{ fontSize: 14 }}>
+                            {username}
+                        </Typography>
+                        <Typography
+                            component = 'div'
+                            variant = 'h5'>
+                            {text}
+                        </Typography>
+                        <Typography
+                            color = 'text.secondary'
+                            sx = {{ mb: 1.5 }}>
+                            {moment(createdAt).format('LT')}
+                        </Typography>
+                        <Typography variant = 'body2'>
+                            {'"a benevolent smile"'}
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size = 'small'>Learn More</Button>
+                    </CardActions>
+                </Card>
+            ))}
         </Box>
     );
 };

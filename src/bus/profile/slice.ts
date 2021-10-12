@@ -7,7 +7,7 @@ import { UserState } from './types';
 // Reducers
 import * as reducers from './cases';
 
-const initialState: UserState = {
+export const initialState: UserState = {
     _id:      null,
     username: null,
 };
