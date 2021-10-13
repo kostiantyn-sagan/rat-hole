@@ -1,8 +1,11 @@
 // Core
-import { select } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 
 // Redux
 import { messagesActions } from '../../slice';
+
+// Actions
+import { fetchMessagesActionAsync } from '../actions';
 
 // Api
 import * as API from '../api';
@@ -19,9 +22,12 @@ export function* createMessage({ payload: text }: ReturnType<CreateMessageContra
     const { profile:  ratuser }: RootState = yield select((state) => state);
 
 
-    yield makeRequest<Message>({
+    const result: Message | null = yield makeRequest<Message>({
         fetcher:      () => API.createMessage(text, ratuser.username ?? ''),
         togglerType:  'isMessageCreating',
         succesAction: messagesActions.createMessage,
     });
+    if (result) {
+        yield put(fetchMessagesActionAsync());
+    }
 }

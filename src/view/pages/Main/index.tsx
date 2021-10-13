@@ -13,7 +13,7 @@ import { Container } from './styles';
 
 const Main = () => {
     const { profile: { username }, logout } = useProfile();
-    const { messages } = useMessages(true);
+    const { messages, createMessageAsync } = useMessages();
 
     return (
         <Container>
@@ -22,7 +22,7 @@ const Main = () => {
                 username = { username }
             />
             <ChatBox messages = { messages }/>
-            <MessageInputField/>
+            <MessageInputField createMessage = { createMessageAsync }/>
         </Container>
     );
 };

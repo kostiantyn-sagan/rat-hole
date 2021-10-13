@@ -1,12 +1,9 @@
 // Core
-import React, { FC } from 'react';
-import {
-    Box,
-    Card,
-    CardContent,
-    Typography,
-} from '@mui/material';
+import React, { FC, useLayoutEffect, useRef } from 'react';
 import moment from 'moment';
+
+// Styles
+import * as S from './styles';
 
 // Types
 import * as Types from '../../../bus/messages/types';
@@ -18,39 +15,32 @@ type PropTypes = {
 export const ChatBox: FC<PropTypes> = ({ messages }) => {
     console.log('messages внутри ChatBox', messages);
 
+    const chatBoxEl = useRef<null | HTMLUListElement>(null);
+    console.log(chatBoxEl);
+
+    useLayoutEffect(() => {
+        console.log('Давай скролить страницу');
+        if (chatBoxEl.current) {
+            chatBoxEl.current.scrollTo({
+                top: chatBoxEl.current.scrollHeight,
+            });
+        }
+    }, [ messages.length ]);
+
     return (
-        <Box
-            sx = {{
-                width:     '100%',
-                padding:   '40px',
-                height:    400,
-                maxWidth:  360,
-                bgcolor:   'background.paper',
-                overflowY: 'scroll',
-            }}>
-            {messages.map(({ _id, username, text, createdAt, updatedAt }) => (
-                <Card
-                    key = { _id }
-                    sx = {{ maxWidth: 275, mb: '14px', marginRight: 'auto' }}>
-                    <CardContent>
-                        <Typography
-                            gutterBottom
-                            color = 'text.secondary'
-                            sx = {{ fontSize: 12 }}>
-                            {username}
-                        </Typography>
-                        <Typography
-                            gutterBottom>
-                            {text}
-                        </Typography>
-                        <Typography
-                            color = 'text.secondary'>
-                            {moment(createdAt).format('LT')}
-                        </Typography>
-                        {moment(createdAt).valueOf() !== moment(updatedAt).valueOf() && <Typography variant = 'body2'>edited</Typography> }
-                    </CardContent>
-                </Card>
-            )).reverse()}
-        </Box>
+        <S.StyledChatBox ref = { chatBoxEl }>
+            {messages
+                .map(({ _id, username, text, createdAt, updatedAt }) => (
+                    <S.ChatBoxItem key = { _id }>
+                        <S.Username>{username}</S.Username>
+                        <S.Text>{text}</S.Text>
+                        {moment(createdAt).valueOf() !== moment(updatedAt).valueOf() && (
+                            <S.StatusEdited>edited</S.StatusEdited>
+                        )}
+                        <S.Time>{moment(createdAt).format('LT')}</S.Time>
+                    </S.ChatBoxItem>
+                ))
+                .reverse()}
+        </S.StyledChatBox>
     );
 };

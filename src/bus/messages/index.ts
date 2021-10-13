@@ -8,14 +8,8 @@ import { useSelector } from '../../tools/hooks';
 // Saga actions
 import { fetchMessagesActionAsync, createMessageActionAsync } from './saga/actions';
 
-// Types
-// import { MessagesState } from './types';
-
-// Interfaces
-// import { messagesActions } from './slice';
-
 // Hooks
-export const useMessages = (isFetching = false) => {
+export const useMessages = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => ({
         messages: state.messages,
@@ -23,11 +17,14 @@ export const useMessages = (isFetching = false) => {
     }));
 
     useEffect(() => {
-        if (isFetching) {
-            setInterval(() => {
-                dispatch(fetchMessagesActionAsync());
-            }, 5000);
-        }
+        const intervalId = setInterval(() => {
+            dispatch(fetchMessagesActionAsync());
+        }, 3000);
+
+        return () => {
+            console.log('Это функция очистки перед следующим вызовом useEffect', intervalId);
+            clearInterval(intervalId);
+        };
     }, []);
 
     return {

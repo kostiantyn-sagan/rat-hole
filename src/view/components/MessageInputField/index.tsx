@@ -1,22 +1,23 @@
 // Core
-import React from 'react';
+import React, { FC } from 'react';
 import { Paper, InputBase, IconButton } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 // Hooks
 import { useForm } from '../../../tools/hooks';
-import { useMessages } from '../../../bus/messages';
 
-export const MessageInputField = () => {
+type PropTypes = {
+    createMessage: (text: string) => void;
+}
+
+export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     const [ form, handleChange, , resetForm ] = useForm({
         text: '',
     });
 
-    const { createMessageAsync } = useMessages();
-
     const sendHandler = () => {
         console.log('нажали send', form);
-        createMessageAsync(form.text);
+        createMessage(form.text);
         resetForm();
     };
 
