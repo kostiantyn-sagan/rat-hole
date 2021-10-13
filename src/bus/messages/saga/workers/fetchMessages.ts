@@ -1,5 +1,6 @@
-// Types
-import { MessagesState } from '../../types';
+// Core
+import { put, select } from 'redux-saga/effects';
+import { isEqual } from 'lodash';
 
 // Actions
 import { messagesActions } from '../../slice';
@@ -10,10 +11,17 @@ import * as API from '../api';
 // Tools
 import {  makeRequest } from '../../../../tools/utils';
 
+// Types
+import { MessagesState } from '../../types';
+import { RootState } from '../../../../init';
+
 export function* fetchMessages() {
-    yield makeRequest<MessagesState>({
-        fetcher:      API.fetchMessages,
-        togglerType:  'isMessagesFetching',
-        succesAction: messagesActions.setMessages,
+    const { messages }: RootState = yield select((state) => state);
+    const newMessages: MessagesState | null = yield makeRequest<MessagesState>({
+        fetcher: API.fetchMessages,
     });
+
+    if (newMessages !== null && !isEqual(messages, newMessages)) {
+        yield put(messagesActions.setMessages(newMessages));
+    }
 }

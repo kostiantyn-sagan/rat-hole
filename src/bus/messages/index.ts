@@ -8,6 +8,9 @@ import { useSelector } from '../../tools/hooks';
 // Saga actions
 import { fetchMessagesActionAsync, createMessageActionAsync } from './saga/actions';
 
+// eslint-disable-next-line init-declarations
+let intervalId: ReturnType<typeof setInterval> | void = void 0;
+
 // Hooks
 export const useMessages = () => {
     const dispatch = useDispatch();
@@ -17,13 +20,20 @@ export const useMessages = () => {
     }));
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
+        if (intervalId) {
+            return void 0;
+        }
+
+        dispatch(fetchMessagesActionAsync());
+
+        intervalId = setInterval(() => {
             dispatch(fetchMessagesActionAsync());
         }, 3000);
 
         return () => {
-            console.log('Это функция очистки перед следующим вызовом useEffect', intervalId);
-            clearInterval(intervalId);
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
         };
     }, []);
 

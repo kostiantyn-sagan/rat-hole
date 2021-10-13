@@ -16,7 +16,6 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     });
 
     const sendHandler = () => {
-        console.log('нажали send', form);
         createMessage(form.text);
         resetForm();
     };
@@ -24,7 +23,10 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     return (
         <Paper
             component = 'form'
-            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}>
+            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+            onSubmit = { (event:React.FormEvent<HTMLFormElement>) => {
+                event.preventDefault();
+            } }>
             <InputBase
                 autoComplete = 'off'
                 inputProps = {{ 'aria-label': 'enter message' }}
@@ -32,7 +34,9 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
                 placeholder = 'Еnter message'
                 sx = {{ ml: 1, flex: 1 }}
                 value = { form.text }
-                onChange = { handleChange }
+                onChange = { (event) => {
+                    handleChange(event);
+                } }
             />
             <IconButton
                 aria-label = 'send'

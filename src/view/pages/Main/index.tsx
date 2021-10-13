@@ -14,6 +14,7 @@ import { Container } from './styles';
 const Main = () => {
     const { profile: { username }, logout } = useProfile();
     const { messages, createMessageAsync } = useMessages();
+    useMessages();
 
     return (
         <Container>
