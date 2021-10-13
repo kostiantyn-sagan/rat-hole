@@ -13,3 +13,4 @@ export type MessagesState = Array<Message>
 
 // Contracts
 export type SetMessagesContract = CaseReducer<MessagesState, PayloadAction<MessagesState>>
+export type CreateMessagesContract = CaseReducer<MessagesState, PayloadAction<Message>>

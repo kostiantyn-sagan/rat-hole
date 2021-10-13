@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useSelector } from '../../tools/hooks';
 
 // Saga actions
-import { fetchMessagesActionAsync } from './saga/actions';
+import { fetchMessagesActionAsync, createMessageActionAsync } from './saga/actions';
 
 // Types
 // import { MessagesState } from './types';
@@ -15,7 +15,7 @@ import { fetchMessagesActionAsync } from './saga/actions';
 // import { messagesActions } from './slice';
 
 // Hooks
-export const useMessages = () => {
+export const useMessages = (isFetching = false) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => ({
         messages: state.messages,
@@ -23,10 +23,15 @@ export const useMessages = () => {
     }));
 
     useEffect(() => {
-        dispatch(fetchMessagesActionAsync());
+        if (isFetching) {
+            setInterval(() => {
+                dispatch(fetchMessagesActionAsync());
+            }, 5000);
+        }
     }, []);
 
     return {
         ...selector,
+        createMessageAsync: (text: string) => void dispatch(createMessageActionAsync(text)),
     };
 };

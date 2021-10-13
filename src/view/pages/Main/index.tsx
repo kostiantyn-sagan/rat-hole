@@ -13,7 +13,7 @@ import { Container } from './styles';
 
 const Main = () => {
     const { profile: { username }, logout } = useProfile();
-    const { messages } = useMessages();
+    const { messages } = useMessages(true);
 
     return (
         <Container>

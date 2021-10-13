@@ -9,20 +9,11 @@ import { useProfile } from '../../../bus/profile';
 // Components
 import { ErrorBoundary } from '../../components';
 
-// Redux
-// import { useFilter } from '../../../bus/client/filters';
-
 // Hooks
 import { useForm } from '../../../tools/hooks';
 
 // Styles
 import * as S from './styles';
-
-// Types & initialState
-// import * as T from './types';
-// import { DayType } from '../../../bus/days/types';
-
-// type PropTypes = ReturnType<typeof useFilter>
 
 const RegistrationForm = () => {
     const [ form, handleChange ] = useForm({

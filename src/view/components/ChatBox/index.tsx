@@ -1,52 +1,56 @@
 // Core
 import React, { FC } from 'react';
-import { Box, Card, CardContent, Typography, CardActions, Button } from '@mui/material';
+import {
+    Box,
+    Card,
+    CardContent,
+    Typography,
+} from '@mui/material';
 import moment from 'moment';
 
 // Types
 import * as Types from '../../../bus/messages/types';
 
 type PropTypes = {
-    messages: Types.MessagesState
+    messages: Types.MessagesState;
 };
 
 export const ChatBox: FC<PropTypes> = ({ messages }) => {
     console.log('messages внутри ChatBox', messages);
-    // const reversedMessages = messages.length !== 0 ? [ ...messages.reverse() ] : [];
-    // console.log('reversedMessages', reversedMessages);
 
     return (
-        <Box sx = {{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper', overflowY: 'scroll' }}>
-            {messages.map(({  _id, username, text, createdAt, updatedAt }) => (
+        <Box
+            sx = {{
+                width:     '100%',
+                padding:   '40px',
+                height:    400,
+                maxWidth:  360,
+                bgcolor:   'background.paper',
+                overflowY: 'scroll',
+            }}>
+            {messages.map(({ _id, username, text, createdAt, updatedAt }) => (
                 <Card
                     key = { _id }
-                    sx = {{ minWidth: 275 }}>
+                    sx = {{ maxWidth: 275, mb: '14px', marginRight: 'auto' }}>
                     <CardContent>
                         <Typography
                             gutterBottom
                             color = 'text.secondary'
-                            sx = {{ fontSize: 14 }}>
+                            sx = {{ fontSize: 12 }}>
                             {username}
                         </Typography>
                         <Typography
-                            component = 'div'
-                            variant = 'h5'>
+                            gutterBottom>
                             {text}
                         </Typography>
                         <Typography
-                            color = 'text.secondary'
-                            sx = {{ mb: 1.5 }}>
+                            color = 'text.secondary'>
                             {moment(createdAt).format('LT')}
                         </Typography>
-                        <Typography variant = 'body2'>
-                            {'"a benevolent smile"'}
-                        </Typography>
+                        {moment(createdAt).valueOf() !== moment(updatedAt).valueOf() && <Typography variant = 'body2'>edited</Typography> }
                     </CardContent>
-                    <CardActions>
-                        <Button size = 'small'>Learn More</Button>
-                    </CardActions>
                 </Card>
-            ))}
+            )).reverse()}
         </Box>
     );
 };
