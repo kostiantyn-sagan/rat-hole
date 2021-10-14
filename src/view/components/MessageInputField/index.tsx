@@ -8,7 +8,7 @@ import { useForm } from '../../../tools/hooks';
 
 type PropTypes = {
     createMessage: (text: string) => void;
-}
+};
 
 export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     const [ form, handleChange, , resetForm ] = useForm({
@@ -23,8 +23,8 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     return (
         <Paper
             component = 'form'
-            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-            onSubmit = { (event:React.FormEvent<HTMLFormElement>) => {
+            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center' }}
+            onSubmit = { (event: React.FormEvent<HTMLFormElement>) => {
                 event.preventDefault();
             } }>
             <InputBase
@@ -40,9 +40,8 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
             />
             <IconButton
                 aria-label = 'send'
-                color = 'primary'
                 disabled = { form.text.trim() === '' }
-                sx = {{ p: '10px' }}
+                sx = {{ p: '10px', color: '#ff874d' }}
                 onClick = { sendHandler }>
                 <SendIcon />
             </IconButton>

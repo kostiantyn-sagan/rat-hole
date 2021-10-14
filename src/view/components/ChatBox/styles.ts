@@ -1,62 +1,69 @@
 import styled from 'styled-components';
 
 export const StyledChatBox = styled.ul`
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 550px;
   display: flex;
-  height: 370px;
   flex-direction: column;
-  width: 600px;
-  overflow-y: scroll;
-  background-color: rgba(255,255,255,0.1);
+  margin-bottom: 4px;
+  border: 1px solid #afb1b8;
+  padding: 10px 32px;
+  font-family: Roboto, sans-serif;
+  background-color: #d9acd0;
+  /* color: ; */
 `;
 
 export const ChatBoxItem = styled.li`
-word-wrap: break-word;
-
-position: relative;
+  position: relative;
+  min-width: 200px;
   max-width: 100%;
-  border-radius: 4px;
-  padding-top: 30px;
-    padding-right: 32px;
-    padding-bottom: 24px;
-    padding-left: 32px;
+  margin-right: auto;
+  border-radius: 6px;
+  padding: 8px 10px;
+  overflow-wrap: break-word;
   background-color: #fff;
-  box-shadow: 0px 2px 1px rgb(0 0 0 / 20%), 0px 1px 1px rgb(0 0 0 / 14%), 0px 1px 3px rgb(0 0 0 / 12%);
+  box-shadow: 0px 2px 1px rgb(0 0 0 / 20%), 0px 1px 1px rgb(0 0 0 / 14%),
+    0px 1px 3px rgb(0 0 0 / 12%);
 
   &:not(:last-child) {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
 `;
 
 export const Username = styled.p`
- margin-bottom: 10px;
- font-size: 14px;
- line-height: 1.14;
- color: #afb1b8;
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  color: #ff874d;
 `;
 
 export const Text = styled.p`
- font-size: 16px;
- line-height: 1.14;
- color:#212121;
+  font-size: 16px;
+  line-height: 1.36;
+  letter-spacing: 0.02em;
+  color: #212121;
 `;
 
 export const Container = styled.div`
-position: absolute;
-bottom: 0;
-right: 0;
-display: flex;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  align-items: center;
 `;
 
 export const Time = styled.p`
- font-size: 14px;
- line-height: 1.14;
- color: rgba(47,48,58,0.8);
+  font-size: 10px;
+  letter-spacing: 0.01em;
+  color: rgba(47, 48, 58, 0.8);
 `;
 
 export const StatusEdited = styled.p`
-margin-right: 8px;
- font-size: 14px;
- line-height: 1.14;
- color: rgba(47,48,58,0.8);
+  margin-right: 4px;
+  font-size: 10px;
+  letter-spacing: 0.01em;
+  color: rgba(47, 48, 58, 0.8);
 `;
-

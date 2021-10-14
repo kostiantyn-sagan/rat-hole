@@ -26,6 +26,7 @@ export const defaultTheme = {
         hoverSecondary:   '#55a630',
         containerBg:      '#d8f3dc',
         anotherSecondary: '#629460',
+        chatPageBg:       '#f5f4fa',
     },
     third: {
         primary:         '#133c55',

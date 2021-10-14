@@ -7,20 +7,27 @@ import * as Types from '../../../bus/profile/types';
 
 type PropTypes = {
     username: Types.User['username'];
-    logoutHandler: () => void
+    logoutHandler: () => void;
 };
 
 export const CustomMenu: FC<PropTypes> = ({ username, logoutHandler }) => (
-    <Box>
+    <Box
+        sx = {{
+            mb:             '10px',
+            display:        'flex',
+            justifyContent: 'space-evenly',
+            alignItems:     'center',
+        }}>
         <Typography
-            gutterBottom
             component = 'div'
-            variant = 'h3'>
-            { username }
+            variant = 'h6'>
+            {username}
         </Typography>
         <Button
-            variant = 'text'
-            onClick = { logoutHandler }>Logout
+            sx = {{ backgroundColor: '#ff874d' }}
+            variant = 'contained'
+            onClick = { logoutHandler }>
+            Logout
         </Button>
     </Box>
 );
