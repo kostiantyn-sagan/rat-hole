@@ -11,6 +11,7 @@ import {
     CustomMenu,
     ChatBox,
     MessageInputField,
+    Keyboard,
 } from '../../components';
 
 // Styles
@@ -34,6 +35,7 @@ const Main = () => {
                     <ChatBox messages = { messages } />
                     <MessageInputField createMessage = { createMessageAsync } />
                 </ChatContainer>
+                <Keyboard/>
             </CenteredContainer>
         </Container>
     );
