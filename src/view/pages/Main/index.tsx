@@ -1,7 +1,7 @@
 // Core
 import React from 'react';
 
-// Redux
+// Bus
 import { useProfile } from '../../../bus/profile';
 import { useMessages } from '../../../bus/messages';
 
@@ -34,7 +34,7 @@ const Main = () => {
                 <ChatContainer>
                     <ChatBox messages = { messages } />
                     <MessageInputField createMessage = { createMessageAsync } />
-                    <Keyboard/>
+                    <Keyboard createMessage = { createMessageAsync }/>
                 </ChatContainer>
             </CenteredContainer>
         </Container>

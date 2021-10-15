@@ -1,8 +1,8 @@
 // Core
-import React, { MouseEvent } from 'react';
+import React, { FC, MouseEvent, useState } from 'react';
 
 // Bus
-import { useKeyboard } from '../../../bus/client/keyboard';
+import { useEnteredMessage } from '../../../bus/client/enteredMessage';
 
 // Data
 import { keyboardData } from './types';
@@ -10,14 +10,43 @@ import { keyboardData } from './types';
 // Styles
 import * as S from './styles';
 
-export const Keyboard = () => {
-    const { setKeyboardText } = useKeyboard();
+// Types
+type PropTypes = {
+    createMessage: (text: string) => void;
+};
+
+export const Keyboard: FC<PropTypes> = ({ createMessage }) => {
+    const { enteredMessage, setKeyboardText, resetEnteredMessage } = useEnteredMessage();
+
+    const [ isShiftPressed, setShiftPressedState ] = useState(false);
+
     const { firstRow, secondRow, thirdRow, fourthRow, fifthRow } = keyboardData;
 
     const keyboardHandler = (event: MouseEvent) => {
-        const btn = event.target as HTMLElement;
-        console.log(btn.textContent);
-        btn.textContent && setKeyboardText(btn.textContent);
+        const { textContent: keyPressed } = event.target as HTMLElement;
+
+        if (!keyPressed) {
+            return;
+        }
+
+        if (keyPressed === 'Enter' && enteredMessage === '') {
+            return;
+        }
+
+        if (keyPressed === 'Shift') {
+            return setShiftPressedState((prevState) => !prevState);
+        }
+
+        if (keyPressed === 'Enter') {
+            createMessage(enteredMessage);
+            resetEnteredMessage();
+
+            return;
+        }
+
+        !isShiftPressed
+            ? setKeyboardText(keyPressed)
+            : setKeyboardText(keyPressed.toUpperCase());
     };
 
     return (
@@ -57,6 +86,7 @@ export const Keyboard = () => {
                 {fourthRow.map(
                     ({ enCode }) => enCode && (
                         <S.Btn
+                            isShiftPressed = { isShiftPressed && enCode === 'Shift' }
                             key = { enCode }
                             type = 'button'>
                             {enCode}

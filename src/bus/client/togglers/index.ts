@@ -8,7 +8,6 @@ import { useSelector } from '../../../tools/hooks';
 const initialState = {
     isOnline:           navigator.onLine,
     isMessagesFetching: false,
-    isTodosFetching:    false,
     isProfileFetching:  false,
     isLoggedIn:         false,
     isMessageCreating:  false,
@@ -16,7 +15,7 @@ const initialState = {
 
 // Types
 export type TogglersKeys = keyof typeof initialState;
-type Options = { type: TogglersKeys, value: boolean };
+type Options = { type: TogglersKeys; value: boolean };
 
 // Slice
 export const toggrersSlice = createSlice({

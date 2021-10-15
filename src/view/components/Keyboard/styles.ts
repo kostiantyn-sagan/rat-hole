@@ -30,7 +30,7 @@ export const FifthRow = styled.div`
     grid-template-columns: repeat(2, 1fr) 50% repeat(2, 1fr);
 `;
 
-export const Btn = styled.button`
+export const Btn = styled.button<{ isShiftPressed?: boolean }>`
 width: 100%;
 height: 100%;
   display: flex;
@@ -44,6 +44,8 @@ height: 100%;
     color: #ffffff;
     background-color: #757575;
     transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    ${(props) => props.isShiftPressed && { color: '#757575', backgroundColor: '#ffffff' }};
 
     :hover, :focus {
         color: #757575;

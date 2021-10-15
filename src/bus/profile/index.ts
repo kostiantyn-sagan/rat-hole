@@ -47,7 +47,6 @@ export const useProfile = () => {
     return {
         profile,
         logout,
-        // isRefreshing
         registerUserAsync: (username: string) => void dispatch(fetchRegisterProfileActionAsync(username)),
     };
 };

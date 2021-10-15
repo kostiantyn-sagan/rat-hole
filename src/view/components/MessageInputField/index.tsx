@@ -1,28 +1,25 @@
 // Core
-import React, { FC } from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import { Paper, InputBase, IconButton } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
-// Tools
-// import { useSelector } from '../../../tools/hooks';
-
-// Hooks
-import { useForm } from '../../../tools/hooks';
+// Bus
+import { useEnteredMessage } from '../../../bus/client/enteredMessage';
 
 type PropTypes = {
     createMessage: (text: string) => void;
 };
 
 export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
-    // const enteredKeyboardText = useSelector((state) => state.keyboard);
+    const { enteredMessage, setInputFieldText, resetEnteredMessage } = useEnteredMessage();
 
-    const [ form, handleChange, , resetForm ] = useForm({
-        text: '',
-    });
+    const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
+        setInputFieldText(event.target.value);
+    };
 
     const sendHandler = () => {
-        createMessage(form.text);
-        resetForm();
+        createMessage(enteredMessage);
+        resetEnteredMessage();
     };
 
     return (
@@ -38,14 +35,12 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
                 name = 'text'
                 placeholder = 'Еnter message'
                 sx = {{ ml: 1, flex: 1 }}
-                value = { form.text }
-                onChange = { (event) => {
-                    handleChange(event);
-                } }
+                value = { enteredMessage }
+                onChange = { handleChange }
             />
             <IconButton
                 aria-label = 'send'
-                disabled = { form.text.trim() === '' }
+                disabled = { enteredMessage.trim() === '' }
                 sx = {{ p: '10px', color: '#ff874d' }}
                 onClick = { sendHandler }>
                 <SendIcon />
