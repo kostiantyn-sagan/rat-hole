@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledChatBox = styled.ul`
   overflow-y: auto;
   overflow-x: hidden;
-  height: 550px;
+  height: 430px;
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;

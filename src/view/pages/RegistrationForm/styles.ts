@@ -1,20 +1,27 @@
 import styled from 'styled-components';
 
+export const CenteredContainer = styled.div`
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Form = styled.form`
-position: fixed;
-top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 margin-left: auto;
 margin-right: auto;
   display: flex;
   align-items: center;
-  width: 100%;
   max-width: 600px;
-  padding: 40px;
+  padding: 30px;
   background-color: #fff;
   border-radius: 3px;
-  overflow: hidden;
+  background-color: ${({ theme }) => theme.second.chatPageBg};
   box-shadow: 0px 2px 1px rgb(0 0 0 / 20%), 0px 1px 1px rgb(0 0 0 / 14%), 0px 1px 3px rgb(0 0 0 / 12%);
 `;
 
@@ -31,6 +38,7 @@ export const Input = styled.input`
   color: #757575;
   outline: none;
   padding: 8px 14px ;
+  background-color: transparent;
 
   &::placeholder {
     font: inherit;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   position: relative;
+  height: 100vh;
   padding-top: 22px;
   padding-bottom: 22px;
   background-color: ${({ theme }) => theme.second.chatPageBg};

@@ -28,21 +28,25 @@ const RegistrationForm = () => {
     };
 
     return (
-        <S.Form>
-            <S.Input
-                autoFocus
-                autoComplete = 'off'
-                name = 'username'
-                placeholder = 'Enter your ratname'
-                value = { form.username }
-                onChange = { handleChange }
-            />
-            <Button
-                size = 'large'
-                onClick = { registerHandler }>
-                Login
-            </Button>
-        </S.Form>
+        <S.CenteredContainer>
+            <S.Form>
+                <S.Input
+                    autoFocus
+                    autoComplete = 'off'
+                    name = 'username'
+                    placeholder = 'Enter your ratname'
+                    value = { form.username }
+                    onChange = { handleChange }
+                />
+                <Button
+                    size = 'large'
+                    sx = {{ backgroundColor: '#ff874d' }}
+                    variant = 'contained'
+                    onClick = { registerHandler }>
+                    Login
+                </Button>
+            </S.Form>
+        </S.CenteredContainer>
     );
 };
 

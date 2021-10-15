@@ -3,6 +3,9 @@ import React, { FC } from 'react';
 import { Paper, InputBase, IconButton } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
+// Tools
+// import { useSelector } from '../../../tools/hooks';
+
 // Hooks
 import { useForm } from '../../../tools/hooks';
 
@@ -11,6 +14,8 @@ type PropTypes = {
 };
 
 export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
+    // const enteredKeyboardText = useSelector((state) => state.keyboard);
+
     const [ form, handleChange, , resetForm ] = useForm({
         text: '',
     });
@@ -23,7 +28,7 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     return (
         <Paper
             component = 'form'
-            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center' }}
+            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center', mb: '6px' }}
             onSubmit = { (event: React.FormEvent<HTMLFormElement>) => {
                 event.preventDefault();
             } }>
