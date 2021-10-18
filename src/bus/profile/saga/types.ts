@@ -10,4 +10,3 @@ export type FetchRefreshProfileContract = (payload: string) => {
     type: typeof FETCH_REFRESH_PROFILE_ASYNC;
     payload: string;
 };
-

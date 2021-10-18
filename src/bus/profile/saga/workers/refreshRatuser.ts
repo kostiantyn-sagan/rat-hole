@@ -14,7 +14,9 @@ import { FetchRefreshProfileContract } from '../types';
 import { API_URL } from '../../../../init';
 import { makeRequest } from '../../../../tools/utils';
 
-export function* refreshRatuser({ payload: userId }: ReturnType<FetchRefreshProfileContract>) {
+export function* refreshRatuser({
+    payload: userId,
+}: ReturnType<FetchRefreshProfileContract>) {
     const fetcher = async () => {
         const response = await fetch(`${API_URL}/users/refresh/${userId}`, {
             method:  'GET',

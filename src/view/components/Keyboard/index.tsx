@@ -16,7 +16,8 @@ type PropTypes = {
 };
 
 export const Keyboard: FC<PropTypes> = ({ createMessage }) => {
-    const { enteredMessage, setKeyboardText, resetEnteredMessage } = useEnteredMessage();
+    const { enteredMessage, setKeyboardText, resetEnteredMessage }
+    = useEnteredMessage();
 
     const [ isShiftPressed, setShiftPressedState ] = useState(false);
 

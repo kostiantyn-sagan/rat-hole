@@ -1,5 +1,11 @@
 // Source data
-import { firstRow, secondRow, thirdRow, fourthRow, fifthRow } from './source-data';
+import {
+    firstRow,
+    secondRow,
+    thirdRow,
+    fourthRow,
+    fifthRow,
+} from './source-data';
 
 export type KeysRow = Array<[string | null, string | null, string | null]>;
 

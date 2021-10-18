@@ -14,7 +14,9 @@ import { FetchRegisterProfileContract } from '../types';
 import { API_URL } from '../../../../init';
 import { makeRequest } from '../../../../tools/utils';
 
-export function* registerRatuser({ payload: username }: ReturnType<FetchRegisterProfileContract>) {
+export function* registerRatuser({
+    payload: username,
+}: ReturnType<FetchRegisterProfileContract>) {
     const fetcher = async () => {
         const response = await fetch(`${API_URL}/users/register`, {
             method:  'POST',

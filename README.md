@@ -3,10 +3,12 @@
 Welcome to Arziburst Boilerplate project.
 
 Project required technologies:
+
 - NPM ^6v
 - Node ^14v
 
 Project technologies:
+
 - Typescript
 - Webpack (Node ^14v required)
 - React
@@ -14,7 +16,8 @@ Project technologies:
 - styled-components
 
 Project extensions:
- - Better Comments (id: aaron-bond.better-comments)
+
+- Better Comments (id: aaron-bond.better-comments)
 
 Best comments names:
 

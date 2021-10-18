@@ -34,7 +34,7 @@ const Main = () => {
                 <ChatContainer>
                     <ChatBox messages = { messages } />
                     <MessageInputField createMessage = { createMessageAsync } />
-                    <Keyboard createMessage = { createMessageAsync }/>
+                    <Keyboard createMessage = { createMessageAsync } />
                 </ChatContainer>
             </CenteredContainer>
         </Container>

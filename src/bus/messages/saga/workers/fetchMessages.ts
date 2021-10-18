@@ -9,7 +9,7 @@ import { messagesActions } from '../../slice';
 import * as API from '../api';
 
 // Tools
-import {  makeRequest } from '../../../../tools/utils';
+import { makeRequest } from '../../../../tools/utils';
 
 // Types
 import { MessagesState } from '../../types';

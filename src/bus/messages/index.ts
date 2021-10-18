@@ -6,7 +6,10 @@ import { useEffect } from 'react';
 import { useSelector } from '../../tools/hooks';
 
 // Saga actions
-import { fetchMessagesActionAsync, createMessageActionAsync } from './saga/actions';
+import {
+    fetchMessagesActionAsync,
+    createMessageActionAsync,
+} from './saga/actions';
 
 // eslint-disable-next-line init-declarations
 let intervalId: ReturnType<typeof setInterval> | void = void 0;

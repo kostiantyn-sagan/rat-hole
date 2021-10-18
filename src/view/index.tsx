@@ -19,10 +19,13 @@ export const App: FC = () => {
     const { setTogglerAction } = useTogglersRedux();
     const [ isDefaultTheme ] = useLocalStorage('isDefaultTheme', true);
 
-    const setOnlineStatusHanlder = useCallback(() => void setTogglerAction({
-        type:  'isOnline',
-        value: navigator.onLine,
-    }), [ setTogglerAction ]);
+    const setOnlineStatusHanlder = useCallback(
+        () => void setTogglerAction({
+            type:  'isOnline',
+            value: navigator.onLine,
+        }),
+        [ setTogglerAction ],
+    );
 
     useEffect(() => {
         setOnlineStatusHanlder();
@@ -31,7 +34,7 @@ export const App: FC = () => {
     }, []);
 
     return (
-        <ThemeProvider theme = { isDefaultTheme ? defaultTheme : defaultTheme } >
+        <ThemeProvider theme = { isDefaultTheme ? defaultTheme : defaultTheme }>
             <GlobalStyles />
             <AppContainer>
                 <Routes />

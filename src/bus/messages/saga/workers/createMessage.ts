@@ -18,9 +18,10 @@ import { RootState } from '../../../../init/redux';
 import { Message } from '../../types';
 import { CreateMessageContract } from '../types';
 
-export function* createMessage({ payload: text }: ReturnType<CreateMessageContract>) {
-    const { profile:  ratuser }: RootState = yield select((state) => state);
-
+export function* createMessage({
+    payload: text,
+}: ReturnType<CreateMessageContract>) {
+    const { profile: ratuser }: RootState = yield select((state) => state);
 
     const result: Message | null = yield makeRequest<Message>({
         fetcher:      () => API.createMessage(text, ratuser.username ?? ''),

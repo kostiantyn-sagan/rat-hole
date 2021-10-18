@@ -6,10 +6,7 @@ import { takeEvery, all, call } from 'redux-saga/effects';
 import * as types from './types';
 
 // Workers
-import {
-    fetchMessages,
-    createMessage,
-} from './workers';
+import { fetchMessages, createMessage } from './workers';
 
 function* watchFetchMessages(): SagaIterator {
     yield takeEvery(types.FETCH_MESSAGES_ASYNC, fetchMessages);

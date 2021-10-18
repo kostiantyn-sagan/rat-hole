@@ -6,5 +6,5 @@ export const setMessages: types.SetMessagesContract = (state, action) => {
 };
 
 export const createMessage: types.CreateMessagesContract = (state, action) => {
-    return [  action.payload, ...state ];
+    return [ action.payload, ...state ];
 };

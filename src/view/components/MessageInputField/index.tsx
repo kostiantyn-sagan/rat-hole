@@ -11,9 +11,10 @@ type PropTypes = {
 };
 
 export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
-    const { enteredMessage, setInputFieldText, resetEnteredMessage } = useEnteredMessage();
+    const { enteredMessage, setInputFieldText, resetEnteredMessage }
+    = useEnteredMessage();
 
-    const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setInputFieldText(event.target.value);
     };
 

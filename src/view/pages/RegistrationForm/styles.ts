@@ -13,8 +13,8 @@ export const CenteredContainer = styled.div`
 `;
 
 export const Form = styled.form`
-margin-left: auto;
-margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   align-items: center;
   max-width: 600px;
@@ -22,7 +22,8 @@ margin-right: auto;
   background-color: #fff;
   border-radius: 3px;
   background-color: ${({ theme }) => theme.second.chatPageBg};
-  box-shadow: 0px 2px 1px rgb(0 0 0 / 20%), 0px 1px 1px rgb(0 0 0 / 14%), 0px 1px 3px rgb(0 0 0 / 12%);
+  box-shadow: 0px 2px 1px rgb(0 0 0 / 20%), 0px 1px 1px rgb(0 0 0 / 14%),
+    0px 1px 3px rgb(0 0 0 / 12%);
 `;
 
 export const Input = styled.input`
@@ -37,11 +38,11 @@ export const Input = styled.input`
   letter-spacing: 0.01em;
   color: #757575;
   outline: none;
-  padding: 8px 14px ;
+  padding: 8px 14px;
   background-color: transparent;
 
   &::placeholder {
     font: inherit;
-  font-size: 18px;
+    font-size: 18px;
   }
 `;
