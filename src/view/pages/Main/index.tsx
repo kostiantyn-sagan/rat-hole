@@ -2,6 +2,7 @@
 import React from 'react';
 
 // Bus
+import { useTogglersRedux } from '../../../bus/client/togglers';
 import { useProfile } from '../../../bus/profile';
 import { useMessages } from '../../../bus/messages';
 
@@ -12,12 +13,18 @@ import {
     ChatBox,
     MessageInputField,
     Keyboard,
+    Modal,
+    MessageEditor,
 } from '../../components';
 
 // Styles
 import { Container, CenteredContainer, ChatContainer } from './styles';
 
 const Main = () => {
+    const {
+        togglersRedux: { showModal, isMessageEditing },
+    } = useTogglersRedux();
+
     const {
         profile: { username },
         logout,
@@ -26,13 +33,21 @@ const Main = () => {
 
     return (
         <Container>
+            {showModal && (
+                <Modal>
+                    {isMessageEditing && <MessageEditor/>}
+                </Modal>
+            )}
             <CenteredContainer>
                 <CustomMenu
                     logoutHandler = { logout }
                     username = { username }
                 />
                 <ChatContainer>
-                    <ChatBox messages = { messages } />
+                    <ChatBox
+                        loggedinUsername = { username }
+                        messages = { messages }
+                    />
                     <MessageInputField createMessage = { createMessageAsync } />
                     <Keyboard createMessage = { createMessageAsync } />
                 </ChatContainer>

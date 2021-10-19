@@ -16,7 +16,12 @@ export type SetMessagesContract = CaseReducer<
 MessagesState,
 PayloadAction<MessagesState>
 >;
-export type CreateMessagesContract = CaseReducer<
+export type CreateMessageContract = CaseReducer<
+MessagesState,
+PayloadAction<Message>
+>;
+
+export type UpdateMessageContract = CaseReducer<
 MessagesState,
 PayloadAction<Message>
 >;

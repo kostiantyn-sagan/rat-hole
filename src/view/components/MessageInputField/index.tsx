@@ -5,12 +5,17 @@ import SendIcon from '@mui/icons-material/Send';
 
 // Bus
 import { useEnteredMessage } from '../../../bus/client/enteredMessage';
+import { useTogglersRedux } from '../../../bus/client/togglers';
 
 type PropTypes = {
     createMessage: (text: string) => void;
 };
 
 export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
+    const {
+        togglersRedux: { isMessageEditing },
+    } = useTogglersRedux();
+
     const { enteredMessage, setInputFieldText, resetEnteredMessage }
     = useEnteredMessage();
 
@@ -36,12 +41,12 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
                 name = 'text'
                 placeholder = 'Еnter message'
                 sx = {{ ml: 1, flex: 1 }}
-                value = { enteredMessage }
+                value = { !isMessageEditing ? enteredMessage : '' }
                 onChange = { handleChange }
             />
             <IconButton
                 aria-label = 'send'
-                disabled = { enteredMessage.trim() === '' }
+                disabled = { enteredMessage.trim() === '' || isMessageEditing }
                 sx = {{ p: '10px', color: '#ff874d' }}
                 onClick = { sendHandler }>
                 <SendIcon />

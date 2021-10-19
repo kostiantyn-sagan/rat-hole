@@ -3,3 +3,5 @@ export * from './CustomMenu';
 export * from './ChatBox';
 export * from './MessageInputField';
 export * from './Keyboard';
+export * from './Modal';
+export * from './MessageEditor';
