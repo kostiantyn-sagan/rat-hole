@@ -1,9 +1,10 @@
 // Core
-import React, { FC, useEffect, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+import React, { FC, MouseEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 // Bus
 import { useTogglersRedux } from '../../../bus/client/togglers';
+import { useEnteredMessage } from '../../../bus/client/enteredMessage';
 
 // Styles
 import * as S from './styles';
@@ -17,26 +18,7 @@ const modalRoot = document.querySelector('#modal-root');
 export const Modal: FC<PropTypes> = ({ children }) => {
     const { setTogglerAction } = useTogglersRedux();
 
-    // const handleKeyDown = (event: globalThis.KeyboardEvent) => {
-    //     if (event.code === 'Escape') {
-    //         console.log('Нажали ESC, нужно закрыть модалку');
-    //         setTogglerAction({
-    //             type:  'showModal',
-    //             value: false,
-    //         });
-    //     }
-    // };
-
-    useEffect(() => {
-        console.log('Modal did mount');
-        // window.addEventListener('keydown', (event) => void handleKeyDown(event));
-
-        return () => {
-            console.log('Modal will unmount');
-            // window.removeEventListener('keydown', (event) => void handleKeyDown(event));
-        };
-    }, []);
-
+    const { resetEnteredMessage } = useEnteredMessage();
 
     const handleBackdropClick = (event: MouseEvent) => {
         if (event.currentTarget === event.target) {
@@ -44,6 +26,18 @@ export const Modal: FC<PropTypes> = ({ children }) => {
                 type:  'showModal',
                 value: false,
             });
+
+            setTogglerAction({
+                type:  'isMessageEditing',
+                value: false,
+            });
+
+            setTogglerAction({
+                type:  'isMessageDeleting',
+                value: false,
+            });
+
+            resetEnteredMessage();
         }
     };
 

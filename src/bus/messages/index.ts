@@ -9,6 +9,8 @@ import { useSelector } from '../../tools/hooks';
 import {
     fetchMessagesActionAsync,
     createMessageActionAsync,
+    updateMessageActionAsync,
+    deleteMessageActionAsync,
 } from './saga/actions';
 
 // eslint-disable-next-line init-declarations
@@ -43,5 +45,7 @@ export const useMessages = () => {
     return {
         ...selector,
         createMessageAsync: (text: string) => void dispatch(createMessageActionAsync(text)),
+        updateMessageAsync: (text: string) => void dispatch(updateMessageActionAsync(text)),
+        deleteMessageAsync: () => void dispatch(deleteMessageActionAsync()),
     };
 };

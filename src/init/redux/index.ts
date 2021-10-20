@@ -7,6 +7,7 @@ import errors from '../../bus/client/errors';
 import messages from '../../bus/messages/slice';
 import profile from '../../bus/profile/slice';
 import enteredMessage from '../../bus/client/enteredMessage/slice';
+import messageEditingId from '../../bus/client/messageEditingId/slice';
 
 // Middleware
 import { middleware, sagaMiddleware } from './middleware';
@@ -21,6 +22,7 @@ export const store = configureStore({
         messages,
         profile,
         enteredMessage,
+        messageEditingId,
     },
     middleware,
     devTools: process.env.NODE_ENV !== 'production',

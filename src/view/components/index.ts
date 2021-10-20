@@ -5,3 +5,4 @@ export * from './MessageInputField';
 export * from './Keyboard';
 export * from './Modal';
 export * from './MessageEditor';
+export * from './PopupDeleteMessage';

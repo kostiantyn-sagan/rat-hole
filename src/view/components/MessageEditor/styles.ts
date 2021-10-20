@@ -38,8 +38,7 @@ export const Btn = styled.button`
   color: #fff;
   font-weight: 500;
   text-transform: uppercase;
-  transition:
-    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   :hover,
   :focus {

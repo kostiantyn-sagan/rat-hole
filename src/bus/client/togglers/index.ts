@@ -13,6 +13,8 @@ const initialState = {
     isMessageCreating:  false,
     showModal:          false,
     isMessageEditing:   false,
+    isMessageUpdating:  false,
+    isMessageDeleting:  false,
 };
 
 // Types

@@ -5,6 +5,7 @@ import moment from 'moment';
 // Bus
 import { useTogglersRedux } from '../../../bus/client/togglers';
 import { useEnteredMessage } from '../../../bus/client/enteredMessage';
+import { useMessageEditingId } from '../../../bus/client/messageEditingId';
 
 // Tools
 import { useSelector } from '../../../tools/hooks';
@@ -22,8 +23,9 @@ type PropTypes = {
 };
 
 export const ChatBox: FC<PropTypes> = ({ messages, loggedinUsername }) => {
-    const {  setInputFieldText }
-    = useEnteredMessage();
+    const { setInputFieldText } = useEnteredMessage();
+
+    const { setMessageEditingId } = useMessageEditingId();
 
     const { setTogglerAction } = useTogglersRedux();
 
@@ -39,12 +41,30 @@ export const ChatBox: FC<PropTypes> = ({ messages, loggedinUsername }) => {
         }
     }, [ messages[ 0 ]?._id ]);
 
-    const onEditBtnClick = (text: Types.Message['text']) => {
-        console.log('нажали на Edit');
+    const onEditBtnClick = (
+        text: Types.Message['text'],
+        id: Types.Message['_id'],
+    ) => {
         setInputFieldText(text);
+
+        setMessageEditingId(id);
 
         setTogglerAction({
             type:  'isMessageEditing',
+            value: true,
+        });
+
+        setTogglerAction({
+            type:  'showModal',
+            value: true,
+        });
+    };
+
+    const ondDeleteBtnClick = (id: Types.Message['_id']) => {
+        setMessageEditingId(id);
+
+        setTogglerAction({
+            type:  'isMessageDeleting',
             value: true,
         });
 
@@ -71,9 +91,14 @@ export const ChatBox: FC<PropTypes> = ({ messages, loggedinUsername }) => {
                             <div>
                                 <button
                                     type = 'button'
-                                    onClick = { () => onEditBtnClick(text) }>Edit
+                                    onClick = { () => onEditBtnClick(text, _id) }>
+                                    Edit
                                 </button>
-                                <button type = 'button'>Delete</button>
+                                <button
+                                    type = 'button'
+                                    onClick = { () => ondDeleteBtnClick(_id) }>
+                                    Delete
+                                </button>
                             </div>
                         )}
                         <S.Container>

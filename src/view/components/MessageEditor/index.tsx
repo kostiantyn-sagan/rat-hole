@@ -1,5 +1,5 @@
 // Core
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
 // Bus
 import { useTogglersRedux } from '../../../bus/client/togglers';
@@ -8,19 +8,22 @@ import { useEnteredMessage } from '../../../bus/client/enteredMessage';
 // Styles
 import * as S from './styles';
 
-export const MessageEditor = () => {
+type PropTypes = {
+    updateMessage: (text: string) => void;
+};
+
+export const MessageEditor: FC<PropTypes> = ({ updateMessage }) => {
     const { setTogglerAction } = useTogglersRedux();
 
     const { enteredMessage, setInputFieldText, resetEnteredMessage }
     = useEnteredMessage();
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        console.log(event);
         setInputFieldText(event.target.value);
     };
 
     const handleSubmit = () => {
-        console.log('fetch update message');
+        updateMessage(enteredMessage);
 
         setTogglerAction({
             type:  'showModal',
@@ -36,7 +39,7 @@ export const MessageEditor = () => {
     };
 
     return (
-        <S.StyledMessageEditor >
+        <S.StyledMessageEditor>
             <S.Textarea
                 value = { enteredMessage }
                 onChange = { handleChange }>

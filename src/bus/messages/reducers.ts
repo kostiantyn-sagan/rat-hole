@@ -9,6 +9,10 @@ export const createMessage: types.CreateMessageContract = (state, action) => {
     return [ action.payload, ...state ];
 };
 
-export const updateMessage: types.UpdateMessageContract = (state, action) => {
-    return [ action.payload, ...state ];
+export const updateMessage: types.UpdateMessageContract = (state) => {
+    return state;
+};
+
+export const deleteMessage: types.DeleteMessageContract = (state) => {
+    return state;
 };

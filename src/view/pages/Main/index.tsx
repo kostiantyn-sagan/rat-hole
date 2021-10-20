@@ -15,6 +15,7 @@ import {
     Keyboard,
     Modal,
     MessageEditor,
+    PopupDeleteMessage,
 } from '../../components';
 
 // Styles
@@ -22,20 +23,31 @@ import { Container, CenteredContainer, ChatContainer } from './styles';
 
 const Main = () => {
     const {
-        togglersRedux: { showModal, isMessageEditing },
+        togglersRedux: { showModal, isMessageEditing, isMessageDeleting },
     } = useTogglersRedux();
 
     const {
         profile: { username },
         logout,
     } = useProfile();
-    const { messages, createMessageAsync } = useMessages();
+
+    const {
+        messages,
+        createMessageAsync,
+        updateMessageAsync,
+        deleteMessageAsync,
+    } = useMessages();
 
     return (
         <Container>
             {showModal && (
                 <Modal>
-                    {isMessageEditing && <MessageEditor/>}
+                    {isMessageEditing && (
+                        <MessageEditor updateMessage = { updateMessageAsync } />
+                    )}
+                    {isMessageDeleting && (
+                        <PopupDeleteMessage deleteMessage = { deleteMessageAsync } />
+                    )}
                 </Modal>
             )}
             <CenteredContainer>

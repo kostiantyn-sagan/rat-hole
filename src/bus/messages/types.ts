@@ -25,3 +25,8 @@ export type UpdateMessageContract = CaseReducer<
 MessagesState,
 PayloadAction<Message>
 >;
+
+export type DeleteMessageContract = CaseReducer<
+MessagesState,
+PayloadAction<boolean>
+>;
