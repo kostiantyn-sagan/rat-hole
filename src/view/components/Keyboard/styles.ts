@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const KeyboardContainer = styled.div`
+margin-bottom: 10px;
   padding: 1px;
   background-color: #000000;
 `;

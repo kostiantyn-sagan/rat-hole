@@ -15,6 +15,8 @@ const initialState = {
     isMessageEditing:   false,
     isMessageUpdating:  false,
     isMessageDeleting:  false,
+    enableKeyboard:     false,
+    isEnKeyboardLayout: true,
 };
 
 // Types

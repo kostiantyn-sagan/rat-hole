@@ -31,7 +31,7 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     return (
         <Paper
             component = 'form'
-            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center', mb: '6px' }}
+            sx = {{ p: '2px 4px', display: 'flex', alignItems: 'center', mb: '8px' }}
             onSubmit = { (event: React.FormEvent<HTMLFormElement>) => {
                 event.preventDefault();
             } }>

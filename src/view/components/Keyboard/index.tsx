@@ -51,7 +51,8 @@ export const Keyboard: FC<PropTypes> = ({ createMessage }) => {
     };
 
     return (
-        <S.KeyboardContainer onClick = { keyboardHandler }>
+        <S.KeyboardContainer
+            onClick = { keyboardHandler }>
             <S.FirstRow>
                 {firstRow.map(({ enCode }) => (
                     <S.Btn

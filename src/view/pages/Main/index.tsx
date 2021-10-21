@@ -1,5 +1,7 @@
 // Core
 import React from 'react';
+import Button from '@mui/material/Button';
+import KeyboardOutlinedIcon from '@mui/icons-material/KeyboardOutlined';
 
 // Bus
 import { useTogglersRedux } from '../../../bus/client/togglers';
@@ -23,7 +25,13 @@ import { Container, CenteredContainer, ChatContainer } from './styles';
 
 const Main = () => {
     const {
-        togglersRedux: { showModal, isMessageEditing, isMessageDeleting },
+        setTogglerAction,
+        togglersRedux: {
+            showModal,
+            isMessageEditing,
+            isMessageDeleting,
+            enableKeyboard,
+        },
     } = useTogglersRedux();
 
     const {
@@ -37,6 +45,18 @@ const Main = () => {
         updateMessageAsync,
         deleteMessageAsync,
     } = useMessages();
+
+    const toggleKeyboardDisplay = () => {
+        !enableKeyboard
+            ? setTogglerAction({
+                type:  'enableKeyboard',
+                value: true,
+            })
+            : setTogglerAction({
+                type:  'enableKeyboard',
+                value: false,
+            });
+    };
 
     return (
         <Container>
@@ -61,7 +81,24 @@ const Main = () => {
                         messages = { messages }
                     />
                     <MessageInputField createMessage = { createMessageAsync } />
-                    <Keyboard createMessage = { createMessageAsync } />
+                    {enableKeyboard && (
+                        <Keyboard
+                            createMessage = { createMessageAsync }
+                        />
+                    )}
+                    <Button
+                        size = 'large'
+                        startIcon = { <KeyboardOutlinedIcon /> }
+                        sx = {{
+                            backgroundColor: '#ff874d',
+                            display:         'flex',
+                            ml:              'auto',
+                            mr:              'auto',
+                        }}
+                        variant = 'contained'
+                        onClick = { toggleKeyboardDisplay }>
+                        {!enableKeyboard ? 'enable keyboard' : 'disable'}
+                    </Button>
                 </ChatContainer>
             </CenteredContainer>
         </Container>
