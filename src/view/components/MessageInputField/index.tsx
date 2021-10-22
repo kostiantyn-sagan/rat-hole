@@ -36,6 +36,7 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
                 event.preventDefault();
             } }>
             <InputBase
+                autoFocus
                 autoComplete = 'off'
                 inputProps = {{ 'aria-label': 'enter message' }}
                 name = 'text'

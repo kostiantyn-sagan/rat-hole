@@ -11,19 +11,34 @@ export const FirstRow = styled.div`
   grid-template-columns: repeat(10, 1fr);
 `;
 
-export const SecondRow = styled.div`
+export const SecondRow = styled.div<{ isRuKeyboardLayout: boolean }>`
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+
+  ${(props) => props.isRuKeyboardLayout && {
+        gridTemplateColumns: 'repeat(11, 1fr)',
+    }
+}
 `;
 
-export const ThirdRow = styled.div`
+export const ThirdRow = styled.div<{ isRuKeyboardLayout: boolean }>`
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+
+  ${(props) => props.isRuKeyboardLayout && {
+        gridTemplateColumns: 'repeat(11, 1fr)',
+    }
+}
 `;
 
-export const FourthRow = styled.div`
+export const FourthRow = styled.div<{ isRuKeyboardLayout: boolean }>`
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+
+  ${(props) => props.isRuKeyboardLayout && {
+        gridTemplateColumns: 'repeat(11, 1fr)',
+    }
+}
 `;
 
 export const FifthRow = styled.div`
