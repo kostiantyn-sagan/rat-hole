@@ -7,6 +7,7 @@ import KeyboardOutlinedIcon from '@mui/icons-material/KeyboardOutlined';
 import { useTogglersRedux } from '../../../bus/client/togglers';
 import { useProfile } from '../../../bus/profile';
 import { useMessages } from '../../../bus/messages';
+import { usePressedKeyboardKeys } from '../../../bus/client/pressedKeyboardKeys';
 
 // Components
 import {
@@ -46,6 +47,8 @@ const Main = () => {
         deleteMessageAsync,
     } = useMessages();
 
+    const { pressedKeyboardKeys, setPressedKey, deletePressedKey } = usePressedKeyboardKeys();
+
     const toggleKeyboardDisplay = () => {
         !enableKeyboard
             ? setTogglerAction({
@@ -84,6 +87,9 @@ const Main = () => {
                     {enableKeyboard && (
                         <Keyboard
                             createMessage = { createMessageAsync }
+                            deletePressedKey = { deletePressedKey }
+                            pressedKeyboardKeys = { pressedKeyboardKeys }
+                            setPressedKey = { setPressedKey }
                         />
                     )}
                     <Button

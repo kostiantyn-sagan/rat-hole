@@ -19,6 +19,17 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     const { enteredMessage, setInputFieldText, resetEnteredMessage }
     = useEnteredMessage();
 
+    // const onEnterPressed = () => {
+
+    // }
+
+    // useEffect(() => {
+    //     window.addEventListener('keydown')
+    //     return () => {
+    //         cleanup
+    //     }
+    // }, [])
+
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setInputFieldText(event.target.value);
     };

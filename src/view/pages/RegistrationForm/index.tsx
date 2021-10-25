@@ -1,5 +1,5 @@
 // Core
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { Button } from '@mui/material';
 import { v4 } from 'uuid';
 
@@ -29,7 +29,7 @@ const RegistrationForm = () => {
 
     return (
         <S.CenteredContainer>
-            <S.Form>
+            <S.Form onSubmit = { (event:FormEvent) =>event.preventDefault() }>
                 <S.Input
                     autoFocus
                     autoComplete = 'off'
@@ -41,6 +41,7 @@ const RegistrationForm = () => {
                 <Button
                     size = 'large'
                     sx = {{ backgroundColor: '#ff874d' }}
+                    type = 'submit'
                     variant = 'contained'
                     onClick = { registerHandler }>
                     Login

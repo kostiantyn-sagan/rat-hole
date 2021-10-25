@@ -53,9 +53,9 @@ export const fourthRow: KeysRow = [
     [ 'Backspace', 'Backspace', '8' ],
 ];
 export const fifthRow: KeysRow = [
-    [ ',', ',', null ],
+    [ ',', ',', '188' ],
     [ 'Ру', 'En', 'changeLang' ],
     [ 'Space', 'Space', '32' ],
-    [ '.', '.', null ],
+    [ '.', '.', '190' ],
     [ 'Enter', 'Enter', '13' ],
 ];

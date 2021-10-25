@@ -2,18 +2,15 @@
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 
 // Types
-export type Message = {
-    _id: string;
-    username: string;
-    text: string;
-    createdAt: string;
-    updatedAt: string;
-};
-export type MessagesState = Array<Message>;
+export type PressedKey = number
+export type PressedKeysState = Array<PressedKey>;
 
 // Contracts
-export type SetEnteredMessageContract = CaseReducer<
-EnteredMessage,
-PayloadAction<EnteredMessage>
+export type SetPressedKeyContract = CaseReducer<
+PressedKeysState,
+PayloadAction<PressedKey>
 >;
-export type ResetEnteredMessageContract = CaseReducer<EnteredMessage>;
+export type DeletePressedKeyContract = CaseReducer<
+PressedKeysState,
+PayloadAction<PressedKey>
+>;

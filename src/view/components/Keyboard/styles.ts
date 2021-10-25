@@ -46,7 +46,7 @@ export const FifthRow = styled.div`
   grid-template-columns: repeat(2, 1fr) 50% repeat(2, 1fr);
 `;
 
-export const Btn = styled.button<{ isShiftPressed?: boolean }>`
+export const Btn = styled.button<{ isShiftPressed?: boolean, backlight: boolean }>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -64,9 +64,16 @@ export const Btn = styled.button<{ isShiftPressed?: boolean }>`
 
   ${(props) => props.isShiftPressed && { color: '#757575', backgroundColor: '#ffffff' }};
 
+  ${(props) => props.backlight && { color: '#757575', backgroundColor: '#ffffff' }};
+
   :hover,
   :focus {
     color: #757575;
     background-color: #ffffff;
+  }
+
+  :active {
+    color: #ffffff;
+    background-color: #ff874d;
   }
 `;
