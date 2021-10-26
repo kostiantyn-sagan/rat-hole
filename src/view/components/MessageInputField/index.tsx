@@ -1,5 +1,5 @@
 // Core
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC, ChangeEvent, useEffect, MutableRefObject } from 'react';
 import { Paper, InputBase, IconButton } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
@@ -7,11 +7,18 @@ import SendIcon from '@mui/icons-material/Send';
 import { useEnteredMessage } from '../../../bus/client/enteredMessage';
 import { useTogglersRedux } from '../../../bus/client/togglers';
 
+// Redux store
+import { store } from '../../../init';
+
 type PropTypes = {
     createMessage: (text: string) => void;
+    messageInputEl: MutableRefObject<HTMLInputElement | null>;
 };
 
-export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
+export const MessageInputField: FC<PropTypes> = ({
+    createMessage,
+    messageInputEl,
+}) => {
     const {
         togglersRedux: { isMessageEditing },
     } = useTogglersRedux();
@@ -19,16 +26,22 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
     const { enteredMessage, setInputFieldText, resetEnteredMessage }
     = useEnteredMessage();
 
-    // const onEnterPressed = () => {
+    const onEnterPressed = (event: KeyboardEvent) => {
+        const enteredMessage = store.getState().enteredMessage;
 
-    // }
+        if (event.code === 'Enter' && enteredMessage !== '') {
+            createMessage(enteredMessage);
+            resetEnteredMessage();
+        }
+    };
 
-    // useEffect(() => {
-    //     window.addEventListener('keydown')
-    //     return () => {
-    //         cleanup
-    //     }
-    // }, [])
+    useEffect(() => {
+        window.addEventListener('keydown', onEnterPressed);
+
+        return () => {
+            window.removeEventListener('keydown', onEnterPressed);
+        };
+    }, []);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setInputFieldText(event.target.value);
@@ -50,6 +63,7 @@ export const MessageInputField: FC<PropTypes> = ({ createMessage }) => {
                 autoFocus
                 autoComplete = 'off'
                 inputProps = {{ 'aria-label': 'enter message' }}
+                inputRef = { messageInputEl }
                 name = 'text'
                 placeholder = 'Еnter message'
                 sx = {{ ml: 1, flex: 1 }}

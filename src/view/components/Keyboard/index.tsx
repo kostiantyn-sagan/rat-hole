@@ -1,5 +1,11 @@
 // Core
-import React, { FC, MouseEvent, useEffect, useState } from 'react';
+import React, {
+    FC,
+    MouseEvent,
+    useEffect,
+    useState,
+    MutableRefObject,
+} from 'react';
 
 // Bus
 import { useEnteredMessage } from '../../../bus/client/enteredMessage';
@@ -12,19 +18,26 @@ import { keyboardData } from './types';
 import * as S from './styles';
 
 // Types
-import { PressedKeysState, PressedKey } from '../../../bus/client/pressedKeyboardKeys/types';
+import {
+    PressedKeysState,
+    PressedKey,
+} from '../../../bus/client/pressedKeyboardKeys/types';
 
 type PropTypes = {
     createMessage: (text: string) => void;
-    pressedKeyboardKeys:PressedKeysState;
+    pressedKeyboardKeys: PressedKeysState;
     setPressedKey: (key: PressedKey) => void;
     deletePressedKey: (key: PressedKey) => void;
+    messageInputEl: MutableRefObject<HTMLInputElement | null>;
 };
 
-export const Keyboard: FC<PropTypes> = ({ createMessage, pressedKeyboardKeys, setPressedKey, deletePressedKey }) => {
-    // const pressedKeyboardKeys = useSelector(({ pressedKeyboardKeys }) => pressedKeyboardKeys);
-    console.log('mount keyboard', pressedKeyboardKeys);
-
+export const Keyboard: FC<PropTypes> = ({
+    createMessage,
+    pressedKeyboardKeys,
+    setPressedKey,
+    deletePressedKey,
+    messageInputEl,
+}) => {
     const {
         setTogglerAction,
         togglersRedux: { isEnKeyboardLayout },
@@ -34,26 +47,21 @@ export const Keyboard: FC<PropTypes> = ({ createMessage, pressedKeyboardKeys, se
     = useEnteredMessage();
 
     const [ isShiftPressed, setShiftPressedState ] = useState(false);
-    // const [ pressedKeys, setPressedKeysState ] = useState<[] | number[]>([]);
 
     const { firstRow, secondRow, thirdRow, fourthRow, fifthRow } = keyboardData;
 
-    const keydownHandler = (event:KeyboardEvent) => {
-        console.log('in keydownHandler', pressedKeyboardKeys);
-        console.log(`нажали на ${event.keyCode}`);
+    const keydownHandler = (event: KeyboardEvent) => {
+        messageInputEl?.current?.focus();
 
         setPressedKey(event.keyCode);
     };
 
-    const keyupHandler = (event:KeyboardEvent) => {
-        console.log(`отпустили ${event.keyCode}`);
-
+    const keyupHandler = (event: KeyboardEvent) => {
         deletePressedKey(event.keyCode);
     };
 
     useEffect(() => {
         window.addEventListener('keydown', keydownHandler);
-
         window.addEventListener('keyup', keyupHandler);
 
         return () => {
@@ -102,8 +110,7 @@ export const Keyboard: FC<PropTypes> = ({ createMessage, pressedKeyboardKeys, se
     };
 
     return (
-        <S.KeyboardContainer
-            onClick = { onKeyboardClick }>
+        <S.KeyboardContainer onClick = { onKeyboardClick }>
             <S.FirstRow>
                 {firstRow.map(({ enCode, ruCode, keyCode }) => (
                     <S.Btn
@@ -118,7 +125,9 @@ export const Keyboard: FC<PropTypes> = ({ createMessage, pressedKeyboardKeys, se
                 {secondRow.map(
                     ({ enCode, ruCode, keyCode }) => (enCode ?? !isEnKeyboardLayout) && (
                         <S.Btn
-                            backlight = { pressedKeyboardKeys.some((key) => `${key}` === keyCode) }
+                            backlight = { pressedKeyboardKeys.some(
+                                (key) => `${key}` === keyCode,
+                            ) }
                             key = { ruCode }
                             type = 'button'>
                             {isEnKeyboardLayout ? enCode : ruCode}
@@ -130,7 +139,9 @@ export const Keyboard: FC<PropTypes> = ({ createMessage, pressedKeyboardKeys, se
                 {thirdRow.map(
                     ({ enCode, ruCode, keyCode }) => (enCode ?? !isEnKeyboardLayout) && (
                         <S.Btn
-                            backlight = { pressedKeyboardKeys.some((key) => `${key}` === keyCode) }
+                            backlight = { pressedKeyboardKeys.some(
+                                (key) => `${key}` === keyCode,
+                            ) }
                             key = { ruCode }
                             type = 'button'>
                             {isEnKeyboardLayout ? enCode : ruCode}
@@ -142,7 +153,9 @@ export const Keyboard: FC<PropTypes> = ({ createMessage, pressedKeyboardKeys, se
                 {fourthRow.map(
                     ({ enCode, ruCode, keyCode }) => (enCode ?? !isEnKeyboardLayout) && (
                         <S.Btn
-                            backlight = { pressedKeyboardKeys.some((key) => `${key}` === keyCode) }
+                            backlight = { pressedKeyboardKeys.some(
+                                (key) => `${key}` === keyCode,
+                            ) }
                             isShiftPressed = { isShiftPressed && enCode === 'Shift' }
                             key = { ruCode }
                             type = 'button'>
@@ -157,7 +170,7 @@ export const Keyboard: FC<PropTypes> = ({ createMessage, pressedKeyboardKeys, se
                         backlight = { pressedKeyboardKeys.some((key) => `${key}` === keyCode) }
                         key = { ruCode }
                         type = 'button'>
-                        {isEnKeyboardLayout ? enCode : ruCode }
+                        {isEnKeyboardLayout ? enCode : ruCode}
                     </S.Btn>
                 ))}
             </S.FifthRow>

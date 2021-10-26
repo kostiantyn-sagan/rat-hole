@@ -12,6 +12,10 @@ export const setKeyboardText: types.SetEnteredMessageContract = (
         return state.slice(0, -1);
     }
 
+    if (action.payload.toLowerCase() === 'space') {
+        return `${state} `;
+    }
+
     return `${state + action.payload}`;
 };
 

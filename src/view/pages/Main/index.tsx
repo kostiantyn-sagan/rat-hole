@@ -1,5 +1,5 @@
 // Core
-import React from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 import Button from '@mui/material/Button';
 import KeyboardOutlinedIcon from '@mui/icons-material/KeyboardOutlined';
 
@@ -25,6 +25,9 @@ import {
 import { Container, CenteredContainer, ChatContainer } from './styles';
 
 const Main = () => {
+    const messageInputEl: MutableRefObject<HTMLInputElement | null>
+    = useRef(null);
+
     const {
         setTogglerAction,
         togglersRedux: {
@@ -47,9 +50,12 @@ const Main = () => {
         deleteMessageAsync,
     } = useMessages();
 
-    const { pressedKeyboardKeys, setPressedKey, deletePressedKey } = usePressedKeyboardKeys();
+    const { pressedKeyboardKeys, setPressedKey, deletePressedKey }
+    = usePressedKeyboardKeys();
 
     const toggleKeyboardDisplay = () => {
+        messageInputEl?.current?.focus();
+
         !enableKeyboard
             ? setTogglerAction({
                 type:  'enableKeyboard',
@@ -83,11 +89,15 @@ const Main = () => {
                         loggedinUsername = { username }
                         messages = { messages }
                     />
-                    <MessageInputField createMessage = { createMessageAsync } />
+                    <MessageInputField
+                        createMessage = { createMessageAsync }
+                        messageInputEl = { messageInputEl }
+                    />
                     {enableKeyboard && (
                         <Keyboard
                             createMessage = { createMessageAsync }
                             deletePressedKey = { deletePressedKey }
+                            messageInputEl = { messageInputEl }
                             pressedKeyboardKeys = { pressedKeyboardKeys }
                             setPressedKey = { setPressedKey }
                         />

@@ -20,8 +20,9 @@ let intervalId: ReturnType<typeof setInterval> | void = void 0;
 export const useMessages = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => ({
-        messages: state.messages,
-        loading:  state.togglers.isMessagesFetching,
+        messages:       state.messages,
+        loading:        state.togglers.isMessagesFetching,
+        enteredMessage: state.enteredMessage,
     }));
 
     useEffect(() => {
