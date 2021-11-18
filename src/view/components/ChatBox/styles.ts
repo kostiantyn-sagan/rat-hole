@@ -7,11 +7,15 @@ export const StyledChatBox = styled.ul`
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;
-  border: 1px solid #afb1b8;
-  padding: 10px 32px;
+  border: 1px solid #b2dbbf;
+  padding: 10px 30px;
   font-family: Roboto, sans-serif;
-  background-color: #d9acd0;
-  /* color: ; */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(243, 255, 189, 1) 0%,
+    rgba(178, 219, 191, 1) 35%,
+    rgba(112, 193, 179, 1) 100%
+  );
 `;
 
 export const ChatBoxItem = styled.li`
@@ -37,7 +41,7 @@ export const Username = styled.p`
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.03em;
-  color: #ff874d;
+  color: #ff1654;
 `;
 
 export const Text = styled.p`

@@ -4,9 +4,8 @@ export const StyledMessageEditor = styled.form`
   display: flex;
   flex-direction: column;
   padding: 16px;
-  border: 1px solid #212121;
+  border: 1px solid #70c1b3;
   border-radius: 4px;
-  margin-bottom: 20px;
   font-family: Roboto, sans-serif;
 `;
 
@@ -34,9 +33,10 @@ export const Btn = styled.button`
   margin-left: auto;
   border-radius: 4px;
   padding: 12px 24px;
-  background-color: #ff874d;
+  background-color: #247ba0;
   color: #fff;
   font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 

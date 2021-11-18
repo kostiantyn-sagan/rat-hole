@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const KeyboardContainer = styled.div`
-margin-bottom: 10px;
+  margin-bottom: 10px;
   padding: 1px;
   background-color: #000000;
 `;
@@ -17,8 +17,7 @@ export const SecondRow = styled.div<{ isRuKeyboardLayout: boolean }>`
 
   ${(props) => props.isRuKeyboardLayout && {
         gridTemplateColumns: 'repeat(11, 1fr)',
-    }
-}
+    }}
 `;
 
 export const ThirdRow = styled.div<{ isRuKeyboardLayout: boolean }>`
@@ -27,8 +26,7 @@ export const ThirdRow = styled.div<{ isRuKeyboardLayout: boolean }>`
 
   ${(props) => props.isRuKeyboardLayout && {
         gridTemplateColumns: 'repeat(11, 1fr)',
-    }
-}
+    }}
 `;
 
 export const FourthRow = styled.div<{ isRuKeyboardLayout: boolean }>`
@@ -37,8 +35,7 @@ export const FourthRow = styled.div<{ isRuKeyboardLayout: boolean }>`
 
   ${(props) => props.isRuKeyboardLayout && {
         gridTemplateColumns: 'repeat(11, 1fr)',
-    }
-}
+    }}
 `;
 
 export const FifthRow = styled.div`
@@ -46,7 +43,10 @@ export const FifthRow = styled.div`
   grid-template-columns: repeat(2, 1fr) 50% repeat(2, 1fr);
 `;
 
-export const Btn = styled.button<{ isShiftPressed?: boolean, backlight: boolean }>`
+export const Btn = styled.button<{
+    isShiftPressed?: boolean;
+    backlight: boolean;
+}>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -74,6 +74,6 @@ export const Btn = styled.button<{ isShiftPressed?: boolean, backlight: boolean 
 
   :active {
     color: #ffffff;
-    background-color: #ff874d;
+    background-color: #247ba0;
   }
 `;

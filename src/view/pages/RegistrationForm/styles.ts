@@ -19,9 +19,8 @@ export const Form = styled.form`
   align-items: center;
   max-width: 600px;
   padding: 30px;
-  background-color: #fff;
   border-radius: 3px;
-  background-color: ${({ theme }) => theme.second.chatPageBg};
+  background-color: #b2dbbf;
   box-shadow: 0px 2px 1px rgb(0 0 0 / 20%), 0px 1px 1px rgb(0 0 0 / 14%),
     0px 1px 3px rgb(0 0 0 / 12%);
 `;
@@ -32,11 +31,11 @@ export const Input = styled.input`
   width: 100%;
   font: inherit;
   font-size: 20px;
-  border: 1px solid rgba(33, 33, 33, 0.2);
+  border: 1px solid #f3ffbd;
   border-radius: 4px;
   line-height: 1.14;
   letter-spacing: 0.01em;
-  color: #757575;
+  color: #212121;
   outline: none;
   padding: 8px 14px;
   background-color: transparent;

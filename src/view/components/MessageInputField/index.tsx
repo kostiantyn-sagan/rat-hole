@@ -73,7 +73,7 @@ export const MessageInputField: FC<PropTypes> = ({
             <IconButton
                 aria-label = 'send'
                 disabled = { enteredMessage.trim() === '' || isMessageEditing }
-                sx = {{ p: '10px', color: '#ff874d' }}
+                sx = {{ p: '10px', color: '#247BA0' }}
                 onClick = { sendHandler }>
                 <SendIcon />
             </IconButton>

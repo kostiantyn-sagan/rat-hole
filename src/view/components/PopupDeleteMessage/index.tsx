@@ -48,13 +48,13 @@ export const PopupDeleteMessage: FC<PropTypes> = ({ deleteMessage }) => {
             <S.Container>
                 <Button
                     size = 'large'
-                    sx = {{ color: '#ff874d', mr: '84px' }}
+                    sx = {{ color: '#247BA0', mr: '84px' }}
                     onClick = { onCancelBtnClick }>
                     Cancel
                 </Button>
                 <Button
-                    color = 'error'
                     size = 'large'
+                    sx = {{ color: '#FF1654' }}
                     onClick = { onDeleteBtnClick }>
                     Delete
                 </Button>

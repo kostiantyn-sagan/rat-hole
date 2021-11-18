@@ -20,11 +20,12 @@ export const CustomMenu: FC<PropTypes> = ({ username, logoutHandler }) => (
         }}>
         <Typography
             component = 'div'
+            sx = {{ color: '#212121' }}
             variant = 'h6'>
             {username}
         </Typography>
         <Button
-            sx = {{ backgroundColor: '#ff874d' }}
+            sx = {{ backgroundColor: '#247BA0' }}
             variant = 'contained'
             onClick = { logoutHandler }>
             Logout

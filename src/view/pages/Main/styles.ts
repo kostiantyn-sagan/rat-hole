@@ -6,7 +6,6 @@ export const Container = styled.section`
   height: 100vh;
   padding-top: 22px;
   padding-bottom: 22px;
-  background-color: ${({ theme }) => theme.second.chatPageBg};
 `;
 
 export const CenteredContainer = styled.div`
